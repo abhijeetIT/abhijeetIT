@@ -7,7 +7,7 @@
 
 I build backend systems that stay up, stay fast, and don't surprise anyone.
 
-[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-View%20Site-f4c430?style=for-the-badge&logo=vercel&logoColor=black)](https://abhijeetIT.github.io/)
+[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-View%20Site-f4c430?style=for-the-badge&logo=vercel&logoColor=black)](https://abhijeetit.github.io/abhijeetIT/)
 <!-- ↑ update this URL to match your actual GitHub Pages link once deployed -->
 [![Resume](https://img.shields.io/badge/Resume-PDF-14171b?style=for-the-badge&logo=readdotcv&logoColor=f4c430)](assets/Abhijeet_Jha_Resume.pdf)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-14171b?style=for-the-badge&logo=linkedin&logoColor=f4c430)](https://www.linkedin.com/in/abhijeet-jha19/)
@@ -18,7 +18,7 @@ I build backend systems that stay up, stay fast, and don't surprise anyone.
 <br>
 
 <div align="center">
-  <a href="https://abhijeetIT.github.io/">
+  <a href="https://abhijeetit.github.io/abhijeetIT/">
     <img src="assets/preview.png" width="100%" alt="Portfolio preview" style="border-radius: 10px;" />
   </a>
 </div>
@@ -58,5 +58,5 @@ I build backend systems that stay up, stay fast, and don't surprise anyone.
 <br>
 
 <div align="center">
-<sub>© 2026 Abhijeet Jha · Built with HTML, CSS & JavaScript</sub>
+<sub>© 2026 Abhijeet Jha</sub>
 </div>
