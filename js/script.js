@@ -1,0 +1,369 @@
+/* ================= Data ================= */
+
+const skillGroups = [
+  {
+    label: "languages",
+    items: [
+      { name: "Java 8+", used: "SpendSnap, RestroCloud" },
+      { name: "SQL", used: "SpendSnap, Data Analytics Internship" },
+      { name: "Python", used: "Student Management System, Data Analytics" },
+      { name: "HTML", used: "Student Management System" },
+    ],
+  },
+  {
+    label: "frameworks",
+    items: [
+      { name: "Spring Boot", used: "SpendSnap, RestroCloud" },
+      { name: "Spring Security", used: "RestroCloud" },
+      { name: "Spring Data JPA", used: "SpendSnap, RestroCloud" },
+      { name: "Hibernate (ORM)", used: "SpendSnap, RestroCloud" },
+      { name: "Flask", used: "Student Management System" },
+    ],
+  },
+  {
+    label: "api & docs",
+    items: [
+      { name: "REST API Design", used: "SpendSnap, RestroCloud" },
+      { name: "Swagger / OpenAPI", used: "RestroCloud" },
+      { name: "JWT Auth", used: "RestroCloud" },
+      { name: "RBAC", used: "RestroCloud" },
+      { name: "DTO Patterns", used: "SpendSnap" },
+    ],
+  },
+  {
+    label: "generative ai",
+    items: [
+      { name: "Google Gemini API", used: "SpendSnap — receipt scanning" },
+      { name: "Prompt Design", used: "SpendSnap" },
+      { name: "LLM Data Extraction", used: "SpendSnap" },
+    ],
+  },
+  {
+    label: "databases",
+    items: [
+      { name: "MySQL", used: "SpendSnap, RestroCloud" },
+      { name: "MongoDB", used: "Student Management System" },
+      { name: "Redis (basic)", used: "Learning / side projects" },
+    ],
+  },
+  {
+    label: "cloud & devops",
+    items: [
+      { name: "AWS S3 / RDS", used: "SpendSnap" },
+      { name: "Docker", used: "SpendSnap" },
+      { name: "Cloudinary", used: "SpendSnap" },
+      { name: "Maven", used: "SpendSnap, RestroCloud" },
+      { name: "Git", used: "All projects" },
+    ],
+  },
+  {
+    label: "testing & tools",
+    items: [
+      { name: "JUnit", used: "RestroCloud" },
+      { name: "Postman", used: "SpendSnap, RestroCloud" },
+      { name: "GitHub Actions", used: "Familiar" },
+      { name: "Linux Shell", used: "Deployment on Koyeb" },
+    ],
+  },
+  {
+    label: "concepts",
+    items: [
+      { name: "Microservices", used: "RestroCloud" },
+      { name: "OOP & SDLC", used: "All projects" },
+      { name: "Exception Handling", used: "SpendSnap — @ControllerAdvice" },
+      { name: "DSA & Debugging", used: "Ongoing practice" },
+    ],
+  },
+];
+
+const projects = [
+  {
+    name: "SpendSnap",
+    imageBase: "assets/images/projects/spendsnap",
+    tagline: "Production expense management platform for tracking and optimizing daily spending, aimed at users aged 17–35.",
+    tech: ["Spring Boot", "MySQL", "JPA/Hibernate", "Thymeleaf", "Cloudinary", "Gemini API", "Docker"],
+    bullets: [
+      "Optimized JPA/Hibernate queries with DTO projection across 6+ REST endpoints, cutting payload size and improving throughput under load.",
+      "Centralized exception handling via @ControllerAdvice, standardizing REST error responses across the app.",
+      "Managed the full production deploy lifecycle on Koyeb — env config, DB sync, zero-downtime releases.",
+      "Built an AI receipt scanner using Google Gemini's vision model to auto-extract amount, date, merchant and category, with mandatory user review before saving.",
+    ],
+    links: [
+      { label: "Live Demo", url: "https://spendsnap.koyeb.app/", type: "live" },
+    ],
+    icon: "receipt",
+  },
+  {
+    name: "RestroCloud",
+    imageBase: "assets/images/projects/restrocloud",
+    tagline: "Role-driven restaurant management platform covering table service, kitchen workflow and order lifecycle.",
+    tech: ["Spring Boot", "Spring Security", "JWT", "MySQL", "JPA/Hibernate", "React JS", "Swagger"],
+    bullets: [
+      "JWT-based stateless auth with segmented access for 3 roles (Admin, Waiter, Kitchen), securing 15+ endpoints.",
+      "Modeled 5+ core entities (Orders, Tables, Payments, Menus, Sessions) with optimized relational mappings.",
+      "Paginated, filterable REST APIs on a modular architecture, supporting 50+ concurrent restaurant sessions.",
+      "Documented every endpoint with Swagger/OpenAPI, cutting integration back-and-forth with the frontend team.",
+    ],
+    links: [
+      { label: "View on GitHub", url: "https://github.com/abhijeetIT/restrocloud-api", type: "github" },
+    ],
+    icon: "table",
+  },
+  {
+    name: "Student Management System",
+    imageBase: "assets/images/projects/student-management",
+    tagline: "Flask-based administrative platform for schools to manage student records with reliable CRUD operations.",
+    tech: ["Flask", "Python", "MongoDB", "PyMongo", "Bootstrap"],
+    bullets: [
+      "Architected a Flask + MongoDB backend for full CRUD on student records, cutting data-entry errors via structured validation.",
+      "Secured DB connectivity with environment-based config, removing hardcoded credentials from the codebase.",
+    ],
+    links: [
+      { label: "View on GitHub", url: "https://github.com/abhijeetIT/Student-Entry", type: "github" },
+    ],
+    icon: "book",
+  },
+];
+
+const projectIcons = {
+  receipt: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 8h32v48l-6-4-6 4-6-4-6 4-6-4-6 4V8z" stroke="#f4c430" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M22 20h20M22 28h20M22 36h12" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="46" cy="44" r="9" fill="#0a0c0e" stroke="#f4c430" stroke-width="2"/>
+    <path d="M43 44l2 2 4-5" stroke="#f4c430" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
+  table: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="22" width="44" height="6" rx="1.5" stroke="#f4c430" stroke-width="2"/>
+    <path d="M16 28v22M48 28v22" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="32" cy="14" r="5" stroke="#f4c430" stroke-width="2"/>
+    <path d="M24 14h4M36 14h4" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+  book: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M32 16c-5-4-13-5-20-3v34c7-2 15-1 20 3 5-4 13-5 20-3V13c-7-2-15-1-20 3z" stroke="#f4c430" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M32 16v34" stroke="#8b9198" stroke-width="2"/>
+  </svg>`,
+};
+
+const linkIcons = {
+  live: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18M3 12h18" stroke="currentColor" stroke-width="1.8"/></svg>`,
+  github: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.4-3.4-1.4-.4-1.2-1-1.5-1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.4.1-2.8 0 0 .8-.3 2.7 1a9 9 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.5.1 2.8.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10 10 0 0 0 22 12.2C22 6.6 17.5 2 12 2z"/></svg>`,
+};
+
+/* ================= Render: Skills ================= */
+
+function renderSkills() {
+  const grid = document.getElementById("skills-grid");
+  grid.innerHTML = skillGroups
+    .map(
+      (group) => `
+      <div class="skill-cat">
+        <h4>${group.label}</h4>
+        <div class="chip-row">
+          ${group.items
+            .map(
+              (item) => `
+            <span class="chip">${item.name}<span class="chip-tip">Used in: ${item.used}</span></span>
+          `
+            )
+            .join("")}
+        </div>
+      </div>`
+    )
+    .join("");
+}
+
+/* ================= Render: Projects ================= */
+
+function renderProjects() {
+  const list = document.getElementById("project-list");
+  list.innerHTML = projects
+    .map((p, idx) => {
+      const primary = p.links[0];
+      return `
+      <article class="project-card">
+        <a class="project-thumb" href="${primary.url}" target="_blank" rel="noopener" aria-label="Open ${p.name}">
+          ${projectIcons[p.icon]}
+          <img data-base="${p.imageBase}" alt="${p.name} screenshot">
+        </a>
+        <div class="project-body">
+          <div class="project-head">
+            <h3><a class="project-title-link" href="${primary.url}" target="_blank" rel="noopener">${p.name}</a></h3>
+          </div>
+          <p class="project-tagline">${p.tagline}</p>
+
+          <div class="project-links">
+            ${p.links
+              .map(
+                (l, i) => `
+              <a class="project-cta ${i === 0 ? "project-cta-primary" : "project-cta-ghost"}" href="${l.url}" target="_blank" rel="noopener">
+                ${linkIcons[l.type] || ""}
+                ${l.label}
+              </a>`
+              )
+              .join("")}
+          </div>
+
+          <div class="tech-row">
+            ${p.tech.map((t) => `<span class="tech-tag">${t}</span>`).join("")}
+          </div>
+
+          <button class="read-more-btn" data-toggle="bullets-${idx}" aria-expanded="false">
+            Read more <span class="read-more-arrow">↓</span>
+          </button>
+          <ul class="project-bullets" id="bullets-${idx}">
+            ${p.bullets.map((b) => `<li>${b}</li>`).join("")}
+          </ul>
+        </div>
+      </article>`;
+    })
+    .join("");
+
+  // wire up read-more toggles
+  document.querySelectorAll(".read-more-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById(btn.dataset.toggle);
+      const isOpen = target.classList.toggle("expanded");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      btn.innerHTML = isOpen
+        ? `Show less <span class="read-more-arrow">↑</span>`
+        : `Read more <span class="read-more-arrow">↓</span>`;
+    });
+  });
+}
+
+/* ================= Tab switching (no page reload) ================= */
+
+function initTabs() {
+  const tabs = document.querySelectorAll(".tab[data-target]");
+  const panels = document.querySelectorAll(".panel");
+  const breadcrumb = document.getElementById("breadcrumb");
+
+  function activate(target, updateHash = true) {
+    tabs.forEach((t) => {
+      const isActive = t.dataset.target === target;
+      t.classList.toggle("active", isActive);
+      t.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+    panels.forEach((p) => p.classList.toggle("active", p.id === target));
+
+    const fileNames = { about: "about.md", projects: "projects.json" };
+    breadcrumb.textContent = `portfolio  /  ${fileNames[target] || target}`;
+
+    if (updateHash) {
+      history.replaceState(null, "", `#${target}`);
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => activate(tab.dataset.target));
+  });
+
+  // Hero / inline "jump" links (e.g. the "See the work" button) reuse the same tab system
+  document.querySelectorAll("[data-jump]").forEach((el) => {
+    el.addEventListener("click", () => activate(el.dataset.jump));
+  });
+
+  const initial = window.location.hash.replace("#", "");
+  const valid = ["about", "projects"];
+  activate(valid.includes(initial) ? initial : "about", false);
+}
+
+/* ================= Skill chip tooltips (tap-friendly for mobile) ================= */
+
+function initChipTooltips() {
+  document.addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    document.querySelectorAll(".chip.open").forEach((c) => {
+      if (c !== chip) {
+        c.classList.remove("open");
+        const tip = c.querySelector(".chip-tip");
+        if (tip) tip.style.left = "";
+      }
+    });
+    if (!chip) return;
+    chip.classList.toggle("open");
+    if (chip.classList.contains("open")) {
+      const tip = chip.querySelector(".chip-tip");
+      if (tip) {
+        tip.style.left = "";
+        const rect = tip.getBoundingClientRect();
+        const margin = 12;
+        if (rect.left < margin) {
+          tip.style.left = `calc(50% + ${margin - rect.left}px)`;
+        } else if (rect.right > window.innerWidth - margin) {
+          tip.style.left = `calc(50% - ${rect.right - (window.innerWidth - margin)}px)`;
+        }
+      }
+    }
+  });
+}
+
+/* ================= Image fallback loader ================= */
+/* Tries several file extensions in turn (.jpg, .jpeg, .png, .webp) so
+   people don't have to get the exact filename/extension byte-perfect.
+   Falls back to the existing placeholder (initials / icon) if none exist. */
+
+const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"];
+
+function loadWithFallback(imgEl, basePath, onSuccess, onAllFail) {
+  let i = 0;
+  function tryNext() {
+    if (i >= IMAGE_EXTENSIONS.length) {
+      if (onAllFail) onAllFail();
+      return;
+    }
+    const candidate = `${basePath}.${IMAGE_EXTENSIONS[i]}`;
+    i++;
+    imgEl.onerror = tryNext;
+    imgEl.onload = () => {
+      if (onSuccess) onSuccess();
+    };
+    imgEl.src = candidate;
+  }
+  tryNext();
+}
+
+function initProfilePhoto() {
+  const img = document.getElementById("profile-img");
+  const fallback = document.querySelector(".avatar-fallback");
+  if (!img) return;
+  loadWithFallback(
+    img,
+    "assets/images/profile",
+    () => {
+      img.style.display = "block";
+      if (fallback) fallback.style.display = "none";
+    },
+    () => {
+      img.style.display = "none";
+    }
+  );
+}
+
+function initProjectThumbs() {
+  document.querySelectorAll(".project-thumb img[data-base]").forEach((img) => {
+    const icon = img.previousElementSibling; // the inline SVG icon sits right before the img
+    loadWithFallback(
+      img,
+      img.dataset.base,
+      () => {
+        img.style.display = "block";
+        if (icon) icon.style.display = "none";
+      },
+      () => {
+        img.style.display = "none";
+      }
+    );
+  });
+}
+
+/* ================= Init ================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderSkills();
+  renderProjects();
+  initTabs();
+  initChipTooltips();
+  initProfilePhoto();
+  initProjectThumbs();
+});
