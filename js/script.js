@@ -127,19 +127,19 @@ const projects = [
 
 const projectIcons = {
   receipt: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 8h32v48l-6-4-6 4-6-4-6 4-6-4-6 4V8z" stroke="#f4c430" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M16 8h32v48l-6-4-6 4-6-4-6 4-6-4-6 4V8z" stroke="#38BDF8" stroke-width="2" stroke-linejoin="round"/>
     <path d="M22 20h20M22 28h20M22 36h12" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="46" cy="44" r="9" fill="#0a0c0e" stroke="#f4c430" stroke-width="2"/>
-    <path d="M43 44l2 2 4-5" stroke="#f4c430" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="46" cy="44" r="9" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+    <path d="M43 44l2 2 4-5" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`,
   table: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="22" width="44" height="6" rx="1.5" stroke="#f4c430" stroke-width="2"/>
+    <rect x="10" y="22" width="44" height="6" rx="1.5" stroke="#38BDF8" stroke-width="2"/>
     <path d="M16 28v22M48 28v22" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="32" cy="14" r="5" stroke="#f4c430" stroke-width="2"/>
+    <circle cx="32" cy="14" r="5" stroke="#38BDF8" stroke-width="2"/>
     <path d="M24 14h4M36 14h4" stroke="#8b9198" stroke-width="2" stroke-linecap="round"/>
   </svg>`,
   book: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M32 16c-5-4-13-5-20-3v34c7-2 15-1 20 3 5-4 13-5 20-3V13c-7-2-15-1-20 3z" stroke="#f4c430" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M32 16c-5-4-13-5-20-3v34c7-2 15-1 20 3 5-4 13-5 20-3V13c-7-2-15-1-20 3z" stroke="#38BDF8" stroke-width="2" stroke-linejoin="round"/>
     <path d="M32 16v34" stroke="#8b9198" stroke-width="2"/>
   </svg>`,
 };
@@ -234,20 +234,15 @@ function renderProjects() {
 /* ================= Tab switching (no page reload) ================= */
 
 function initTabs() {
-  const tabs = document.querySelectorAll(".tab[data-target]");
+  const tabs = document.querySelectorAll(".nav-link[data-target]");
   const panels = document.querySelectorAll(".panel");
-  const breadcrumb = document.getElementById("breadcrumb");
 
   function activate(target, updateHash = true) {
     tabs.forEach((t) => {
       const isActive = t.dataset.target === target;
       t.classList.toggle("active", isActive);
-      t.setAttribute("aria-selected", isActive ? "true" : "false");
     });
     panels.forEach((p) => p.classList.toggle("active", p.id === target));
-
-    const fileNames = { about: "about.md", projects: "projects.json" };
-    breadcrumb.textContent = `portfolio  /  ${fileNames[target] || target}`;
 
     if (updateHash) {
       history.replaceState(null, "", `#${target}`);
@@ -266,6 +261,31 @@ function initTabs() {
   const initial = window.location.hash.replace("#", "");
   const valid = ["about", "projects"];
   activate(valid.includes(initial) ? initial : "about", false);
+}
+
+/* ================= Mobile nav toggle + smooth-scroll to Contact ================= */
+
+function initNavExtras() {
+  const toggle = document.getElementById("nav-toggle");
+  const links = document.getElementById("nav-links");
+  if (toggle && links) {
+    toggle.addEventListener("click", () => {
+      const isOpen = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    // close mobile menu after choosing a link
+    links.querySelectorAll(".nav-link, .nav-resume").forEach((el) => {
+      el.addEventListener("click", () => links.classList.remove("open"));
+    });
+  }
+
+  document.querySelectorAll("[data-scroll]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const target = document.getElementById(el.dataset.scroll);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+      if (links) links.classList.remove("open");
+    });
+  });
 }
 
 /* ================= Skill chip tooltips (tap-friendly for mobile) ================= */
@@ -363,6 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
   renderProjects();
   initTabs();
+  initNavExtras();
   initChipTooltips();
   initProfilePhoto();
   initProjectThumbs();
