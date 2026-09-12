@@ -247,6 +247,27 @@ a:focus-visible, button:focus-visible{
   margin-bottom: 36px;
   border-bottom: 1px solid var(--line-soft);
 }
+.terminal-line{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 14px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.prompt-path{ color: var(--text-faint); }
+.prompt-dollar{ color: var(--text-faint); }
+.terminal-typed{
+  color: var(--accent-2);
+  font-weight: 600;
+  text-shadow: 0 0 12px var(--accent-wash);
+}
+.cursor{
+  color: var(--accent-2);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink{ 50%{ opacity: 0; } }
 .hero-line{
   font-size: 32px;
   line-height: 1.28;

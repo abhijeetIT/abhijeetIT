@@ -80,13 +80,13 @@ const projects = [
   {
     name: "SpendSnap",
     imageBase: "assets/images/projects/spendsnap",
-    tagline: "Production expense management platform for tracking and optimizing daily spending, aimed at users aged 17–35.",
+    tagline: "An expense tracker built for people who are done guessing where their money went — snap a receipt, and it does the boring part for you.",
     tech: ["Spring Boot", "MySQL", "JPA/Hibernate", "Thymeleaf", "Cloudinary", "Gemini API", "Docker"],
     bullets: [
-      "Optimized JPA/Hibernate queries with DTO projection across 6+ REST endpoints, cutting payload size and improving throughput under load.",
-      "Centralized exception handling via @ControllerAdvice, standardizing REST error responses across the app.",
-      "Managed the full production deploy lifecycle on Koyeb — env config, DB sync, zero-downtime releases.",
-      "Built an AI receipt scanner using Google Gemini's vision model to auto-extract amount, date, merchant and category, with mandatory user review before saving.",
+      "Rebuilt the query layer around DTO projections instead of full entity fetches — noticeably smaller payloads, and it holds up better once more people hit it at once.",
+      "Every error now runs through one central handler (@ControllerAdvice) instead of scattered try-catches, so the API fails predictably instead of surprising the frontend.",
+      "Owns its own deploy pipeline on Koyeb — I handle the environment config, DB syncing, and zero-downtime releases myself, end to end.",
+      "Added a receipt scanner powered by Gemini's vision model — snap a photo, it pulls out the amount, date, merchant and category, and you just confirm before it saves.",
     ],
     links: [
       { label: "Live Demo", url: "https://spendsnap.koyeb.app/", type: "live" },
@@ -96,13 +96,13 @@ const projects = [
   {
     name: "RestroCloud",
     imageBase: "assets/images/projects/restrocloud",
-    tagline: "Role-driven restaurant management platform covering table service, kitchen workflow and order lifecycle.",
+    tagline: "A role-based restaurant backend — admins, waiters and kitchen staff each see exactly what they need, and nothing else.",
     tech: ["Spring Boot", "Spring Security", "JWT", "MySQL", "JPA/Hibernate", "React JS", "Swagger"],
     bullets: [
-      "JWT-based stateless auth with segmented access for 3 roles (Admin, Waiter, Kitchen), securing 15+ endpoints.",
-      "Modeled 5+ core entities (Orders, Tables, Payments, Menus, Sessions) with optimized relational mappings.",
-      "Paginated, filterable REST APIs on a modular architecture, supporting 50+ concurrent restaurant sessions.",
-      "Documented every endpoint with Swagger/OpenAPI, cutting integration back-and-forth with the frontend team.",
+      "Stateless JWT auth with three distinct roles (Admin, Waiter, Kitchen) locking down 15+ endpoints — no shared logins, no session state to babysit.",
+      "Modeled orders, tables, payments, menus and sessions as proper relational entities instead of one giant do-everything table.",
+      "Paginated, filterable APIs built to hold up under 50+ concurrent restaurant sessions, not just a clean demo dataset.",
+      "Documented every endpoint in Swagger so the frontend team could self-serve instead of pinging me for field names.",
     ],
     links: [
       { label: "View on GitHub", url: "https://github.com/abhijeetIT/restrocloud-api", type: "github" },
@@ -112,11 +112,11 @@ const projects = [
   {
     name: "Student Management System",
     imageBase: "assets/images/projects/student-management",
-    tagline: "Flask-based administrative platform for schools to manage student records with reliable CRUD operations.",
+    tagline: "An admin tool for schools to manage student records — unglamorous, but it taught me how much 'simple' CRUD still needs to be done right.",
     tech: ["Flask", "Python", "MongoDB", "PyMongo", "Bootstrap"],
     bullets: [
-      "Architected a Flask + MongoDB backend for full CRUD on student records, cutting data-entry errors via structured validation.",
-      "Secured DB connectivity with environment-based config, removing hardcoded credentials from the codebase.",
+      "Flask + MongoDB backend handling full CRUD on student records, with validation that actually catches bad data before it gets saved.",
+      "Pulled credentials out of the codebase entirely and into environment config — a small habit that matters a lot later.",
     ],
     links: [
       { label: "View on GitHub", url: "https://github.com/abhijeetIT/Student-Entry", type: "github" },
@@ -377,6 +377,62 @@ function initProjectThumbs() {
   });
 }
 
+/* ================= Terminal typewriter effect ================= */
+
+function initTerminalTypewriter() {
+  const el = document.getElementById("terminal-typed");
+  if (!el) return;
+
+  const phrases = [
+    "explore my skills",
+    "check out my projects",
+    "grab my resume",
+    "let's build something",
+  ];
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) {
+    el.textContent = phrases[0];
+    return;
+  }
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  const TYPE_SPEED = 65;
+  const DELETE_SPEED = 35;
+  const HOLD_TIME = 1400;
+  const GAP_TIME = 400;
+
+  function tick() {
+    const current = phrases[phraseIndex];
+
+    if (!deleting) {
+      charIndex++;
+      el.textContent = current.slice(0, charIndex);
+      if (charIndex === current.length) {
+        deleting = true;
+        setTimeout(tick, HOLD_TIME);
+        return;
+      }
+      setTimeout(tick, TYPE_SPEED);
+    } else {
+      charIndex--;
+      el.textContent = current.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(tick, GAP_TIME);
+        return;
+      }
+      setTimeout(tick, DELETE_SPEED);
+    }
+  }
+
+  tick();
+}
+
 /* ================= Init ================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -387,4 +443,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initChipTooltips();
   initProfilePhoto();
   initProjectThumbs();
+  initTerminalTypewriter();
 });
