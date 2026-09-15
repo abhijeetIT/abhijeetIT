@@ -271,11 +271,15 @@ function initNavExtras() {
   if (toggle && links) {
     toggle.addEventListener("click", () => {
       const isOpen = links.classList.toggle("open");
+      toggle.classList.toggle("open", isOpen);
       toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
     // close mobile menu after choosing a link
     links.querySelectorAll(".nav-link, .nav-resume").forEach((el) => {
-      el.addEventListener("click", () => links.classList.remove("open"));
+      el.addEventListener("click", () => {
+        links.classList.remove("open");
+        toggle.classList.remove("open");
+      });
     });
   }
 
@@ -346,6 +350,7 @@ function loadWithFallback(imgEl, basePath, onSuccess, onAllFail) {
 function initProfilePhoto() {
   const img = document.getElementById("profile-img");
   const fallback = document.querySelector(".avatar-fallback");
+  const trigger = document.getElementById("avatar-trigger");
   if (!img) return;
   loadWithFallback(
     img,
@@ -353,11 +358,51 @@ function initProfilePhoto() {
     () => {
       img.style.display = "block";
       if (fallback) fallback.style.display = "none";
+      if (trigger) trigger.dataset.hasPhoto = "true";
     },
     () => {
       img.style.display = "none";
     }
   );
+}
+
+/* ================= Photo lightbox ================= */
+
+function initLightbox() {
+  const trigger = document.getElementById("avatar-trigger");
+  const profileImg = document.getElementById("profile-img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.getElementById("lightbox-close");
+  if (!trigger || !lightbox) return;
+
+  function open() {
+    if (trigger.dataset.hasPhoto !== "true") return; // no real photo loaded yet, nothing to zoom into
+    lightboxImg.src = profileImg.src;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  trigger.addEventListener("click", open);
+  trigger.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      open();
+    }
+  });
+  closeBtn.addEventListener("click", close);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
 }
 
 function initProjectThumbs() {
@@ -374,6 +419,21 @@ function initProjectThumbs() {
         img.style.display = "none";
       }
     );
+  });
+}
+
+/* ================= Favicon: use profile photo when available ================= */
+/* Falls back silently to the existing AJ favicon files already linked in <head>
+   if no profile photo is found — nothing to break either way. */
+
+function initFavicon() {
+  const testImg = new Image();
+  loadWithFallback(testImg, "assets/images/profile", () => {
+    document.querySelectorAll("link[rel~='icon']").forEach((link) => {
+      link.href = testImg.src;
+    });
+    const appleIcon = document.querySelector("link[rel='apple-touch-icon']");
+    if (appleIcon) appleIcon.href = testImg.src;
   });
 }
 
@@ -443,5 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initChipTooltips();
   initProfilePhoto();
   initProjectThumbs();
+  initFavicon();
+  initLightbox();
   initTerminalTypewriter();
 });

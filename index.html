@@ -54,7 +54,7 @@
     <section class="panel active" id="about" role="tabpanel">
 
       <div class="profile-strip">
-        <div class="avatar">
+        <div class="avatar" id="avatar-trigger" role="button" tabindex="0" aria-label="View full profile photo">
           <span class="avatar-fallback">AJ</span>
           <img class="avatar-img" id="profile-img" alt="Abhijeet Jha">
         </div>
@@ -215,6 +215,14 @@
     </footer>
 
   </main>
+</div>
+
+<!-- ===== Photo lightbox ===== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightbox-img" alt="Abhijeet Jha">
 </div>
 
 <script src="js/script.js"></script>
