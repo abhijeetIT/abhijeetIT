@@ -43,7 +43,7 @@ const skillGroups = [
     items: [
       { name: "MySQL", used: "SpendSnap, RestroCloud" },
       { name: "MongoDB", used: "Student Management System" },
-      { name: "Redis (basic)", used: "Learning / side projects" },
+      { name: "Redis (basic)", used: "RestroCloud" },
     ],
   },
   {
@@ -322,10 +322,6 @@ function initChipTooltips() {
   });
 }
 
-/* ================= Image fallback loader ================= */
-/* Tries several file extensions in turn (.jpg, .jpeg, .png, .webp) so
-   people don't have to get the exact filename/extension byte-perfect.
-   Falls back to the existing placeholder (initials / icon) if none exist. */
 
 const IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"];
 
