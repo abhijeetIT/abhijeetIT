@@ -259,7 +259,6 @@ function initTabs() {
   activate(valid.includes(initial) ? initial : "about", false);
 }
 
-/* ================= Mobile nav toggle + smooth-scroll to Contact ================= */
 
 function initNavExtras() {
   const toggle = document.getElementById("nav-toggle");
