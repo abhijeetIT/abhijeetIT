@@ -424,8 +424,6 @@ function initFavicon() {
   });
 }
 
-/* ================= Terminal typewriter effect ================= */
-
 function initTerminalTypewriter() {
   const el = document.getElementById("terminal-typed");
   if (!el) return;
