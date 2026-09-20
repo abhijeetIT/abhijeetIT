@@ -478,8 +478,6 @@ function initTerminalTypewriter() {
   tick();
 }
 
-/* ================= Init ================= */
-
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
   renderProjects();
