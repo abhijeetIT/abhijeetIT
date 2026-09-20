@@ -217,7 +217,6 @@ function renderProjects() {
     })
     .join("");
 
-  // wire up read-more toggles
   document.querySelectorAll(".read-more-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = document.getElementById(btn.dataset.toggle);
