@@ -412,9 +412,6 @@ function initProjectThumbs() {
   });
 }
 
-/* ================= Favicon: use profile photo when available ================= */
-/* Falls back silently to the existing AJ favicon files already linked in <head>
-   if no profile photo is found — nothing to break either way. */
 
 function initFavicon() {
   const testImg = new Image();
