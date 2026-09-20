@@ -287,7 +287,6 @@ function initNavExtras() {
   });
 }
 
-/* ================= Skill chip tooltips (tap-friendly for mobile) ================= */
 
 function initChipTooltips() {
   document.addEventListener("click", (e) => {
