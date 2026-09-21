@@ -101,7 +101,7 @@ const projects = [
       "Modeled orders, tables, payments, menus and sessions as proper relational entities instead of one giant do-everything table.",
       "Paginated, filterable APIs built to hold up under 50+ concurrent restaurant sessions, not just a clean demo dataset.",
       "Documented every endpoint in Swagger so the frontend team could self-serve instead of pinging me for field names.",
-      "• Implemented Redis-based OTP verification with OTP hashing",
+      "Implemented Redis-based OTP verification with OTP hashing",
     ],
     links: [
       { label: "View on GitHub", url: "https://github.com/abhijeetIT/restrocloud-api", type: "github" },
