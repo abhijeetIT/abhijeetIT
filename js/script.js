@@ -61,6 +61,8 @@ const skillGroups = [
       { name: "Postman", used: "SpendSnap, RestroCloud" },
       { name: "GitHub Actions", used: "Familiar" },
       { name: "Linux Shell", used: "Deployment on Koyeb" },
+      { name: "Apache Kafka", used: "Lerned" },
+
     ],
   },
   {
